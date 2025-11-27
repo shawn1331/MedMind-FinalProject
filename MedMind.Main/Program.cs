@@ -1,2 +1,3 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// Shawn Miner MedMind Final Project Intro. To Software Engineering
+
+Console.WriteLine("MedMind");
