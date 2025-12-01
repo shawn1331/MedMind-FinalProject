@@ -26,10 +26,24 @@ while (!exit)
     }
     else if (choice == 3)
     {
+        Appointment appt = new(GetAppointmentTime(), GetProviderName(), GetAppointmentLocation(), GetAppointmentPurpose());
+        service.AddAppointment(appt);
+    }
+    else if (choice == 4)
+    {
+        var todaysAppts = service.GetAppointmentsForDate(GetTodaysDate());
+        foreach (var item in todaysAppts)
+        {
+            Console.WriteLine(item);
+        }
+    }
+    else if (choice == 5)
+    {
         exit = true;
     }
-
 }
+
+Console.WriteLine("Thank you for using MedMind.");
 
 static string PrintMenu() => @"           Welcome to MedMind
 
@@ -37,7 +51,9 @@ static string PrintMenu() => @"           Welcome to MedMind
 
 1. Add Medication
 2. View All Medications
-3. Exit Program";
+3. Add Appointment
+4. View Appointment By Date
+5. Exit Program";
 
 static int GetMenuOption() => Console.ReadKey(true).KeyChar;
 
@@ -82,4 +98,46 @@ static DateTime GetEndDate()
     }
     else
         return endDate;
+}
+
+static string GetProviderName()
+{
+    Console.Write("Please enter the providers name: ");
+    return Console.ReadLine();
+}
+
+static string GetAppointmentLocation()
+{
+    Console.Write("Please enter the location of the appointment. For example \"Provo office\".");
+    return Console.ReadLine();
+}
+
+static string GetAppointmentPurpose()
+{
+    Console.Write("Please enter the reason for the appointment: ");
+    return Console.ReadLine();
+}
+
+static DateTime GetAppointmentTime()
+{
+    Console.WriteLine("Please Enter the Appointment time in month/day/year format.");
+    if (!DateTime.TryParse(Console.ReadLine(), new CultureInfo("en-US"), out DateTime appointmentTime))
+    {
+        Console.WriteLine("That was invalid entry try again.");
+        return GetStartDate();
+    }
+    else
+        return appointmentTime;
+}
+
+static DateTime GetTodaysDate()
+{
+    Console.WriteLine("Please Enter todays date in month/day/year format.");
+    if (!DateTime.TryParse(Console.ReadLine(), new CultureInfo("en-US"), out DateTime todaysDate))
+    {
+        Console.WriteLine("That was invalid entry try again.");
+        return GetStartDate();
+    }
+    else
+        return todaysDate;
 }
