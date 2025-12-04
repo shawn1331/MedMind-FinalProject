@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Threading.Tasks;
+
 namespace MedMind.Logic;
+
 public class MedMindService
 {
     public List<Medication> Medications { get; }
     public List<Appointment> Appointments { get; }
+    public List<DoseLogEntry> DoseLogs { get; }
 
-    public MedMindService()
+    public MedMindService(List<Medication> meds, List<Appointment> appts, List<DoseLogEntry> logs)
     {
-        Medications = new();
-        Appointments = new();
+        Medications = meds;
+        Appointments = appts;
+        DoseLogs = logs;
     }
 
     public void AddMedication(Medication med) => Medications.Add(med);

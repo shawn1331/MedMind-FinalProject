@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMind.Main", "MedMind.Mai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMind.Tests", "MedMind.Tests\MedMind.Tests.csproj", "{16C3DFD9-5C29-41A9-A66E-8EB80A598039}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMind.Persistence", "MedMind.Persistence\MedMind.Persistence.csproj", "{3AB692E7-F621-4452-8451-C3F4F38381F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,18 @@ Global
 		{16C3DFD9-5C29-41A9-A66E-8EB80A598039}.Release|x64.Build.0 = Release|Any CPU
 		{16C3DFD9-5C29-41A9-A66E-8EB80A598039}.Release|x86.ActiveCfg = Release|Any CPU
 		{16C3DFD9-5C29-41A9-A66E-8EB80A598039}.Release|x86.Build.0 = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|x64.Build.0 = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{3AB692E7-F621-4452-8451-C3F4F38381F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +79,8 @@ Global
 		{44904AA2-E552-4857-A9AF-DB699352F774} = {82D6AEFE-959C-14AF-1B65-F9ADC4444EC7}
 		{6B36AD1D-C8B9-4A46-9FB3-4242EE805965} = {82D6AEFE-959C-14AF-1B65-F9ADC4444EC7}
 		{16C3DFD9-5C29-41A9-A66E-8EB80A598039} = {82D6AEFE-959C-14AF-1B65-F9ADC4444EC7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBE0705A-EEB5-4226-BC91-C7CEBE9CE0C1}
 	EndGlobalSection
 EndGlobal
