@@ -3,10 +3,10 @@
 public class Medication
 {
     public Guid ID { get; private set; }
-    public string Name { get; private set; }
-    public float DosageMg { get; private set; }
-    public DateTime StartDate { get; private set; }
-    public DateTime EndDate { get; private set; }
+    public string Name { get; set; }          
+    public float DosageMg { get; set; }      
+    public DateTime StartDate { get; set; }    
+    public DateTime EndDate { get; set; }     
 
     public Medication(Guid id, string name, float dosageMg, DateTime startDate, DateTime endDate)
     {
@@ -15,5 +15,10 @@ public class Medication
         DosageMg = dosageMg;
         StartDate = startDate;
         EndDate = endDate;
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} ({DosageMg} mg) {StartDate:d} - {EndDate:d}";
     }
 }
