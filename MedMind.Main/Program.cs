@@ -12,7 +12,7 @@ var dataFilePath = Path.Combine(dataDir, "medmind-data.json");
 
 var repo = new MedMindRepo(dataFilePath);
 var data = repo.LoadData();
-MedMindService service = new(data.Medications, data.Appointments, data.DoseLogs);
+MedMindService service = new(data.Medications, data.Appointments);
 
 while (isRunning)
 {
@@ -57,7 +57,7 @@ while (isRunning)
         {
             Medications = service.Medications,
             Appointments = service.Appointments,
-            DoseLogs = service.DoseLogs
+            //DoseLogs = service.DoseLogs
         };
         repo.SaveData(finalData);
     }

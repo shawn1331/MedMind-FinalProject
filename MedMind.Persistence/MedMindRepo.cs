@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MedMind.Logic;
+namespace MedMind.Persistence;
 public class MedMindRepo
 {
     private readonly string _filePath;
