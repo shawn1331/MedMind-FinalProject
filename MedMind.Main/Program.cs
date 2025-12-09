@@ -32,6 +32,8 @@ while (isRunning)
         {
             Console.WriteLine(item);
         }
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
     }
     else if (choice == '3')
     {
@@ -45,6 +47,8 @@ while (isRunning)
         {
             Console.WriteLine(item);
         }
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
     }
     else if (choice == '5')
     {
@@ -54,10 +58,19 @@ while (isRunning)
             Medications = service.Medications,
             Appointments = service.Appointments,
             DoseLogs = service.DoseLogs
-        }
+        };
         repo.SaveData(finalData);
     }
+    else if (choice == '6')
+    {
+        EditMedicationFlow(service);
+    }
+    else if (choice == '7')
+    {
+        EditAppointmentFlow(service);
+    }
 }
+
 
 Console.WriteLine("Thank you for using MedMind.");
 
@@ -73,7 +86,9 @@ static void PrintMenu()
 2. View All Medications
 3. Add Appointment
 4. View Appointment By Date
-5. Exit Program");
+5. Edit Medication
+6. Edit Appointment
+7. Exit Program");
 }
 
 static char GetMenuOption() => Console.ReadKey(true).KeyChar;
@@ -115,7 +130,7 @@ static DateTime GetEndDate()
     if (!DateTime.TryParse(Console.ReadLine(), new CultureInfo("en-US"), out DateTime endDate))
     {
         Console.WriteLine("That was invalid entry try again.");
-        return GetStartDate();
+        return GetEndDate();
     }
     else
         return endDate;
@@ -145,7 +160,7 @@ static DateTime GetAppointmentTime()
     if (!DateTime.TryParse(Console.ReadLine(), new CultureInfo("en-US"), out DateTime appointmentTime))
     {
         Console.WriteLine("That was invalid entry try again.");
-        return GetStartDate();
+        return GetAppointmentTime();
     }
     else
         return appointmentTime;
@@ -162,3 +177,122 @@ static DateTime GetTodaysDate()
     else
         return todaysDate;
 }
+
+static void EditMedicationFlow(MedMindService service)
+{
+    Console.Clear();
+    Console.WriteLine("=== Edit Medication ===");
+
+    var meds = service.GetMedications();
+    if (meds.Count == 0)
+    {
+        Console.WriteLine("There are no medications to edit.");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+        return;
+    }
+
+    for (int i = 0; i < meds.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {meds[i]}");
+    }
+
+    Console.Write("Enter the number of the medication you want to edit: ");
+    if (!int.TryParse(Console.ReadLine(), out int selection) ||
+        selection < 1 || selection > meds.Count)
+    {
+        Console.WriteLine("Invalid selection. Press Enter to continue...");
+        Console.ReadLine();
+        return;
+    }
+
+    var medToEdit = meds[selection - 1];
+
+    Console.WriteLine($"Editing medication: {medToEdit.Name}");
+
+    string newName = GetMedicationName();
+    float newDosage = GetDosageMg();
+    DateTime newStart = GetStartDate();
+    DateTime newEnd = GetEndDate();
+
+    var updatedMedication = new Medication(
+        medToEdit.ID,  
+        newName,
+        newDosage,
+        newStart,
+        newEnd);
+
+    bool success = service.EditMedication(updatedMedication);
+
+    if (success)
+    {
+        Console.WriteLine("Medication updated successfully.");
+    }
+    else
+    {
+        Console.WriteLine("Error: medication could not be updated.");
+    }
+
+    Console.WriteLine("Press Enter to continue...");
+    Console.ReadLine();
+}
+
+static void EditAppointmentFlow(MedMindService service)
+{
+    Console.Clear();
+    Console.WriteLine("=== Edit Appointment ===");
+
+    var appts = service.GetAppointments();
+    if (appts.Count == 0)
+    {
+        Console.WriteLine("There are no appointments to edit.");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+        return;
+    }
+
+    for (int i = 0; i < appts.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {appts[i]}");
+    }
+
+    Console.Write("Enter the number of the appointment you want to edit: ");
+    if (!int.TryParse(Console.ReadLine(), out int selection) ||
+        selection < 1 || selection > appts.Count)
+    {
+        Console.WriteLine("Invalid selection. Press Enter to continue...");
+        Console.ReadLine();
+        return;
+    }
+
+    var apptToEdit = appts[selection - 1];
+
+    Console.WriteLine($"Editing appointment with {apptToEdit.ProviderName} on {apptToEdit.AppointmentTime:d}");
+
+    DateTime newTime = GetAppointmentTime();
+    string newProvider = GetProviderName();
+    string newLocation = GetAppointmentLocation();
+    string newPurpose = GetAppointmentPurpose();
+
+    var updatedAppointment = new Appointment(
+        apptToEdit.ID,   // keep same ID
+        newTime,
+        newProvider,
+        newLocation,
+        newPurpose);
+
+    bool success = service.EditAppointment(updatedAppointment);
+
+    if (success)
+    {
+        Console.WriteLine("Appointment updated successfully.");
+    }
+    else
+    {
+        Console.WriteLine("Error: appointment could not be updated.");
+    }
+
+    Console.WriteLine("Press Enter to continue...");
+    Console.ReadLine();
+}
+
